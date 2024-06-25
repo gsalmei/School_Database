@@ -24,3 +24,10 @@ INSERT INTO alunos (nome, nascimento) VALUES ('Rogerio Almeida', '1969-06-27');
 INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Almeida', '1995-10-18');
 INSERT INTO alunos (nome, nascimento) VALUES ('Ana Souza', '1969-05-03');
 INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Moraes', '1991-11-05');
+
+SHOW TABLES;
+
+DESC cursos;
+DESC alunos; 
+
+SELECT * FROM alunos;
