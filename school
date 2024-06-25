@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS alunos;
+
+CREATE TABLE alunos(
+  matricula INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  nascimento DATE,
+  PRIMARY KEY (matricula)
+ );
+ 
+ DROP TABLE IF EXISTS cursos;
+ 
+ CREATE TABLE cursos(
+   cod_curso VARCHAR(50) NOT NULL,
+   nome_curso VARCHAR(100),
+   materia VARCHAR(50),
+   matricula INT,
+   FOREIGN KEY (matricula)
+   		REFERENCES alunos(matricula)
+   			ON DELETE CASCADE 
+);
+
+INSERT INTO alunos (nome, nascimento) VALUES ('Gustavo Almeida', '1990-09-20');
+INSERT INTO alunos (nome, nascimento) VALUES ('Rogerio Almeida', '1969-06-27');
+INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Almeida', '1995-10-18');
+INSERT INTO alunos (nome, nascimento) VALUES ('Ana Souza', '1969-05-03');
+INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Moraes', '1991-11-05');
