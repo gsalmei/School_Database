@@ -13,10 +13,7 @@ CREATE TABLE alunos(
    cod_curso VARCHAR(50) NOT NULL,
    nome_curso VARCHAR(100),
    materia VARCHAR(50),
-   matricula INT,
-   FOREIGN KEY (matricula)
-   		REFERENCES alunos(matricula)
-   			ON DELETE CASCADE 
+   matricula INT
 );
 
 INSERT INTO alunos (nome, nascimento) VALUES ('Gustavo Almeida', '1990-09-20');
@@ -24,6 +21,12 @@ INSERT INTO alunos (nome, nascimento) VALUES ('Rogerio Almeida', '1969-06-27');
 INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Almeida', '1995-10-18');
 INSERT INTO alunos (nome, nascimento) VALUES ('Ana Souza', '1969-05-03');
 INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Moraes', '1991-11-05');
+
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('ENGQ012010', 'Engenharia Química', 'Química Orgânica', 2),
+('ENGC012010', 'Engenharia Civil', 'Desenho Técnico', 4),
+('ENGM012010', 'Engenharia Mecânica', 'Mecânica Geral', 1),
+('MAT012010', 'Matemática', 'Cálculo III', 3),
+('FIS012010', 'Física', 'Física II', 2);
 
 SHOW TABLES;
 
