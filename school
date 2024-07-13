@@ -1,3 +1,9 @@
+-- Criando banco de dados --
+CREATE DATABASE school;
+USE school;
+
+-- Criando as tabelas Alunos e Cursos --
+
 DROP TABLE IF EXISTS alunos;
 
 CREATE TABLE alunos(
@@ -7,14 +13,16 @@ CREATE TABLE alunos(
   PRIMARY KEY (matricula)
  );
  
- DROP TABLE IF EXISTS cursos;
- 
- CREATE TABLE cursos(
+  DROP TABLE IF EXISTS cursos;
+
+  CREATE TABLE cursos(
    cod_curso VARCHAR(50) NOT NULL,
    nome_curso VARCHAR(100),
    materia VARCHAR(50),
    matricula INT
 );
+
+-- Inserindo dados nas tabelas --
 
 INSERT INTO alunos (nome, nascimento) VALUES ('Gustavo Almeida', '1990-09-20');
 INSERT INTO alunos (nome, nascimento) VALUES ('Rogerio Almeida', '1969-06-27');
@@ -22,15 +30,55 @@ INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Almeida', '1995-10-18');
 INSERT INTO alunos (nome, nascimento) VALUES ('Ana Souza', '1969-05-03');
 INSERT INTO alunos (nome, nascimento) VALUES ('Mariana Moraes', '1991-11-05');
 
-INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('ENGQ012010', 'Engenharia Química', 'Química Orgânica', 2),
-('ENGC012010', 'Engenharia Civil', 'Desenho Técnico', 4),
-('ENGM012010', 'Engenharia Mecânica', 'Mecânica Geral', 1),
-('MAT012010', 'Matemática', 'Cálculo III', 3),
-('FIS012010', 'Física', 'Física II', 2);
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('ENGQ012010', 'Engenharia Química', 'Química Orgânica', 2);
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('ENGC012010', 'Engenharia Civil', 'Desenho Técnico', 4);
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('ENGM012010', 'Engenharia Mecânica', 'Mecânica Geral', 1);
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('MAT012010', 'Matemática', 'Cálculo III', 3);
+INSERT INTO cursos (cod_curso, nome_curso, materia, matricula) VALUES ('FIS012010', 'Física', 'Física II', 2);
 
+-- Exibindo tabelas e suas informações --
 SHOW TABLES;
 
 DESC cursos;
-DESC alunos; 
+DESC alunos;
 
+-- Consultando todos os registros das tabelas --
 SELECT * FROM alunos;
+SELECT * FROM cursos;
+
+-- Consultando todos os alunos e ordenando alfabeticamente --
+SELECT *
+FROM alunos
+ORDER BY nome;
+
+-- Consultando quantos alunos existem na tabela alunos --
+SELECT 
+	count(*) AS 'Registros'
+FROM alunos;
+
+-- Coletando o ano, mês e dia de nascimento dos alunos e retornando qual o dia da semana --
+SELECT
+	nome,
+	EXTRACT(YEAR FROM nascimento) AS 'Ano_Nascimento',
+    EXTRACT(MONTH FROM nascimento) AS 'Mês_Nascimento',
+    EXTRACT(DAY FROM nascimento) AS 'Dia_Nascimento',
+    CASE
+		WHEN DAYOFWEEK(nascimento) = 1 THEN 'Domingo'
+        WHEN DAYOFWEEK(nascimento) = 2 THEN 'Segunda - Feira'
+        WHEN DAYOFWEEK(nascimento) = 3 THEN 'Terça - Feira'
+        WHEN DAYOFWEEK(nascimento) = 4 THEN 'Quarta - Feira'
+        WHEN DAYOFWEEK(nascimento) = 5 THEN 'Quinta - Feira'
+        WHEN DAYOFWEEK(nascimento) = 6 THEN 'Sexta - Feira'
+        WHEN DAYOFWEEK(nascimento) = 7 THEN 'Sábado'
+	END AS 'Dia_da_Semana'
+FROM alunos
+ORDER BY nome;
+
+-- Calculando a idade dos alunos --
+SELECT 
+	nome,
+	extract(YEAR FROM CURRENT_DATE) AS 'Ano_Atual',
+    extract(YEAR FROM nascimento) AS 'Ano_Nascimento',
+    extract(YEAR FROM CURRENT_DATE) - extract(YEAR FROM nascimento) AS 'Idade'
+FROM alunos
+ORDER BY nome;
