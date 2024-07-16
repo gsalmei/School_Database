@@ -82,3 +82,21 @@ SELECT
     extract(YEAR FROM CURRENT_DATE) - extract(YEAR FROM nascimento) AS 'Idade'
 FROM alunos
 ORDER BY nome;
+
+-- Consultando em quais cursos os alunos estão matriculados --
+SELECT
+	nome,
+    cursos. *
+FROM alunos
+LEFT JOIN cursos
+	ON alunos.matricula = cursos.matricula;
+    
+-- Consultando apenas alunos que estão matriculados em algum curso --
+
+SELECT
+	nome,
+    cursos.nome_curso
+FROM alunos
+INNER JOIN cursos
+	ON alunos.matricula = cursos.matricula;
+
